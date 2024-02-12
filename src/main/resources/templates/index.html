@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Register</title>
+
+    <!-- Bootstrap CSS link (you can replace this link with the version you prefer) -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #loginButton {
+            background-color: #28a745;
+            color: white;
+            border: none;
+        }
+
+        #registerButton {
+            background-color: #007bff;
+            color: white;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Welcome to our Website</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <a th:href="@{/login}" class="btn btn-success btn-lg btn-block" role="button">Login</a>
+        </div>
+        <div class="col-md-6">
+            <a th:href="@{/register}" class="btn btn-primary btn-lg btn-block" role="button">Register</a>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

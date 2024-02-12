@@ -16,6 +16,7 @@ CREATE TABLE Item(
     id varchar(255) NOT NULL,
     title varchar(100),
     format varchar(30),
+    rpm int,
     genre varchar(30),
     year_of_release int,
     condition_of_item varchar(50),

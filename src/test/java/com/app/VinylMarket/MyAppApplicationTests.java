@@ -1,4 +1,4 @@
-package com.example.MyApp;
+package com.app.VinylMarket;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
