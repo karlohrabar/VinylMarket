@@ -14,6 +14,7 @@ CREATE TABLE User(
 CREATE TABLE Item(
 
     id varchar(255) NOT NULL,
+    user_id varchar(255),
     title varchar(100),
     format varchar(30),
     rpm int,
@@ -23,7 +24,8 @@ CREATE TABLE Item(
     other_info varchar(255),
     country varchar(100),
     label varchar(50),
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    FOREIGN KEY (user_id) REFERENCES User(id)
 
 );
 

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinyl Record Form</title>
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+
+<body>
+
+<div class="container mt-5">
+    <h2 class="mb-4">Vinyl Record Information</h2>
+
+    <div th:if="${param.error}">
+        <div class="alert alert-danger">Something went wrong.</div>
+    </div>
+
+    <div th:if="${param.success}">
+        <div class="alert alert-danger">You've successfully submitted your record! </div>
+    </div>
+
+    <form th:action="@{/item/create}" method="post" th:object="${item}">
+
+
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" class="form-control" id="title" name="title" th:field="*{title}" required>
+        </div>
+
+
+        <div class="form-group">
+            <label for="artist">Artist / artists:</label>
+            <input type="text" class="form-control" id="artist" name="artist"  multiple>
+        </div>
+
+
+        <div class="form-group">
+            <label for="country">Country:</label>
+            <select id="country" name="country" th:field="*{country}">
+
+            </select>
+        </div>
+
+
+        <div class="form-group">
+            <label for="label">Label:</label>
+            <input type="text" class="form-control" id="label" name="label" th:field="*{label}" required>
+        </div>
+
+
+        <div class="form-group">
+            <label for="genre">Genre:</label>
+            <select class="form-control" name="genre" id="genre">
+                <option th:each="genreOpt : ${T(com.app.VinylMarket.enums.Genre).values()}"
+                        th:value="${genreOpt}"
+                        th:text="${genreOpt.displayValue}"
+                        ></option>
+            </select>
+        </div>
+
+
+        <div class="form-group">
+            <label for="format">Format:</label>
+            <select class="form-control" name="format" id="format">
+                <option th:each="formatOpt : ${T(com.app.VinylMarket.enums.Format).values()}"
+                        th:value="${formatOpt}"
+                        th:text="${formatOpt.displayValue}"
+                ></option>
+            </select>
+        </div>
+
+
+        <div class="form-group">
+            <label for="rpm">RPM:</label>
+            <select class="form-control" id="rpm" name="rpm" th:field="*{rpm}" required>
+                <option value="33">33 1/3</option>
+                <option value="45">45</option>
+                <option value="78">78</option>
+            </select>
+        </div>
+
+
+        <div class="form-group">
+            <label for="year">Year of Release:</label>
+            <input type="number" class="form-control" id="year" name="year" th:field="*{year_of_release}" required>
+        </div>
+
+
+        <div class="form-group">
+            <label for="condition">Item Condition:</label>
+            <select class="form-control" id="condition" name="condition" th:field="*{condition_of_item}" required>
+                <option value="Mint">Mint</option>
+                <option value="Near mint">Near mint</option>
+                <option value="Very good +">Very good +</option>
+                <option value="Very good">Very good</option>
+                <option value="Good +">Good +</option>
+                <option value="Good ">Good</option>
+                <option value="Fair ">Fair</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Price (in EUR):</label>
+            <input type="number" class="form-control" id="price" name="price" th:field="*{price}" required>
+        </div>
+
+
+        <div class="form-group">
+            <label for="otherInfo">Other Information:</label>
+            <textarea class="form-control" id="otherInfo" name="otherInfo" rows="4" th:field="*{other_info}"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+</div>
+
+
+</body>
+
+<script>
+    async function fetchCountries() {
+        try {
+            const response = await fetch('https://restcountries.com/v3.1/all');
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error fetching countries:', error);
+            return [];
+        }
+    }
+
+
+    async function populateDropdown() {
+        const countryDropdown = document.getElementById('country');
+        const countries = await fetchCountries();
+
+        countries.sort((a, b) => a.name.common.localeCompare(b.name.common));
+
+        countries.forEach(country => {
+            const option = document.createElement('option');
+            option.value = country.name.common;
+            option.text = country.name.common;
+            countryDropdown.add(option);
+        });
+    }
+    populateDropdown();
+</script>
+
+</html>

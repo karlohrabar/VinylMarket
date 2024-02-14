@@ -21,12 +21,14 @@ public class ItemEntity {
     private String title;
 
     @Column
+    @Enumerated(EnumType.STRING)
     private Format format;
 
     @Column
     private Integer rpm;
 
     @Column
+    @Enumerated(EnumType.STRING)
     private Genre genre;
 
     @Column
@@ -43,5 +45,12 @@ public class ItemEntity {
 
     @Column
     private String label;
+
+    @Column
+    private Integer price;
+
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private UserEntity userEntity;
 
 }

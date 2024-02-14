@@ -38,15 +38,23 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
                 .formLogin(form -> form.loginPage("/login")
-                        .permitAll()
                         .loginProcessingUrl("/login")
                         .successHandler(myAuthenticationSuccessHandler()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorize) ->
-                        authorize.requestMatchers("/register").permitAll()
-                                .requestMatchers("/index").permitAll())
+                        authorize
+                                .requestMatchers("/profile").authenticated()
+                                .requestMatchers("/register/**").permitAll()
+                                .requestMatchers("/login").permitAll()
+                                .requestMatchers("/user/**").hasAuthority("USER")
+                                .requestMatchers("/admin/**").hasAuthority("ADMIN")
+                                .requestMatchers("/item/**").hasAuthority("USER"))
+
                 .logout()
-                .logoutSuccessUrl("/login");
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?loguot")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID");
 
 
 

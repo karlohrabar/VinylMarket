@@ -1,28 +1,28 @@
 package com.app.VinylMarket.mappers;
 
+import com.app.VinylMarket.dto.UserAuthDto;
 import com.app.VinylMarket.dto.UserInfoDto;
-import com.app.VinylMarket.dto.UserLoginDto;
 import com.app.VinylMarket.entities.UserEntity;
 import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-02-12T23:04:57+0100",
+    date = "2024-02-14T17:56:21+0100",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21 (N/A)"
 )
 public class UserMapperImpl implements UserMapper {
 
     @Override
-    public UserEntity toEntity(UserLoginDto userLoginDto) {
-        if ( userLoginDto == null ) {
+    public UserEntity toEntity(UserAuthDto userAuthDto) {
+        if ( userAuthDto == null ) {
             return null;
         }
 
         UserEntity userEntity = new UserEntity();
 
-        userEntity.setUsername( userLoginDto.getUsername() );
-        userEntity.setEmail( userLoginDto.getEmail() );
-        userEntity.setCountry( userLoginDto.getCountry() );
+        userEntity.setUsername( userAuthDto.getUsername() );
+        userEntity.setEmail( userAuthDto.getEmail() );
+        userEntity.setCountry( userAuthDto.getCountry() );
 
         return userEntity;
     }

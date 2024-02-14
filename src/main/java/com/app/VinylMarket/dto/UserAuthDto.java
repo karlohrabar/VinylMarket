@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserLoginDto
+public class UserAuthDto
 {
     @NotEmpty(message = "User Name field is empty!")
     private String username;

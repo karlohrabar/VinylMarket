@@ -35,7 +35,12 @@
             </div>
             <div th:if="${param.success}">
                 <div class="alert alert-info">
-                    You have successfully registered our app!
+                    You have successfully registered to our app!
+                </div>
+            </div>
+            <div th:if="${param.error}">
+                <div class="alert alert-info">
+                    Something went wrong.
                 </div>
             </div>
             <div class="card-body">
@@ -86,6 +91,12 @@
                         <p th:errors = "*{passwd}" class="text-danger"
                            th:if="${#fields.hasErrors('passwd')}"></p>
                     </div>
+                    <label for="country">Choose a country:</label>
+                    <select id="country" name="country" th:field="*{country}">
+
+                    </select>
+                    <br>
+                    <br>
                     <div class="form-group">
                         <button class="btn btn-primary" type="submit">Register</button>
                         <span>Already registered? <a th:href="@{/login}">Login here</a></span>
@@ -95,6 +106,36 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    async function fetchCountries() {
+        try {
+            const response = await fetch('https://restcountries.com/v3.1/all');
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error fetching countries:', error);
+            return [];
+        }
+    }
+
+
+    async function populateDropdown() {
+        const countryDropdown = document.getElementById('country');
+        const countries = await fetchCountries();
+
+        countries.sort((a, b) => a.name.common.localeCompare(b.name.common));
+
+        countries.forEach(country => {
+            const option = document.createElement('option');
+            option.value = country.name.common;
+            option.text = country.name.common;
+            countryDropdown.add(option);
+        });
+    }
+    populateDropdown();
+</script>
 </body>
 </html>
 
