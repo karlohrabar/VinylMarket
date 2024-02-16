@@ -1,23 +1,22 @@
 package com.app.VinylMarket.security;
 
-import com.app.VinylMarket.mappers.UserMapper;
-import com.app.VinylMarket.mappers.UserMapperImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.web.filter.HiddenHttpMethodFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
+public class SecurityConfig implements WebMvcConfigurer{
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -26,35 +25,22 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-
     @Bean
-    public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
-        return new HiddenHttpMethodFilter();
-    }
-
-
-
-@   Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
                 .formLogin(form -> form.loginPage("/login")
                         .loginProcessingUrl("/login")
                         .successHandler(myAuthenticationSuccessHandler()))
-                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorize) ->
                         authorize
-                                .requestMatchers("/profile").authenticated()
-                                .requestMatchers("/register/**").permitAll()
+                                .requestMatchers("/register").permitAll()
                                 .requestMatchers("/login").permitAll()
-                                .requestMatchers("/user/**").hasAuthority("USER")
-                                .requestMatchers("/admin/**").hasAuthority("ADMIN")
-                                .requestMatchers("/item/**").hasAuthority("USER"))
+                                .requestMatchers("/user/**").authenticated()
+                                .requestMatchers("/admin/**").authenticated()
+                                .requestMatchers("/item/**").authenticated()
+                                .requestMatchers("/item-photos/**").authenticated())
 
-                .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/login?loguot")
-                .invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID");
+                .logout(Customizer.withDefaults());
 
 
 
@@ -66,12 +52,6 @@ public class SecurityConfig {
     public AuthenticationSuccessHandler myAuthenticationSuccessHandler() {
         return new MySimpleUrlAuthenticationSuccessHandler();
     }
-
-    @Bean
-    public UserMapper userMapper(){
-        return new UserMapperImpl();
-    }
-
 
 }
 

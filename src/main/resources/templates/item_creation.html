@@ -24,7 +24,7 @@
         <div class="alert alert-danger">You've successfully submitted your record! </div>
     </div>
 
-    <form th:action="@{/item/create}" method="post" th:object="${item}">
+    <form th:action="@{/item/create}" method="post" th:object="${item}" enctype="multipart/form-data">
 
 
         <div class="form-group">
@@ -44,6 +44,11 @@
             <select id="country" name="country" th:field="*{country}">
 
             </select>
+        </div>
+
+        <div>
+            <label>Photo:</label>
+            <input type="file" name="photo" accept="image/png, image/jpeg, image/jpg"/>
         </div>
 
 

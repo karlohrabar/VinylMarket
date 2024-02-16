@@ -3,11 +3,12 @@
 /home/hrabar/Desktop/VinylMarket/src/main/java/com/app/VinylMarket/repository/UserRepository.java
 /home/hrabar/Desktop/VinylMarket/src/main/java/com/app/VinylMarket/entities/ItemArtistEntity.java
 /home/hrabar/Desktop/VinylMarket/src/main/java/com/app/VinylMarket/security/MySimpleUrlAuthenticationSuccessHandler.java
-/home/hrabar/Desktop/VinylMarket/src/main/java/com/app/VinylMarket/security/userInfo/AuthenticatonFacadeImpl.java
 /home/hrabar/Desktop/VinylMarket/src/main/java/com/app/VinylMarket/mappers/UserMapper.java
 /home/hrabar/Desktop/VinylMarket/src/main/java/com/app/VinylMarket/dto/UserInfoDto.java
+/home/hrabar/Desktop/VinylMarket/src/main/java/com/app/VinylMarket/util/MvcConfig.java
 /home/hrabar/Desktop/VinylMarket/src/main/java/com/app/VinylMarket/enums/Role.java
 /home/hrabar/Desktop/VinylMarket/src/main/java/com/app/VinylMarket/dto/ItemDto.java
+/home/hrabar/Desktop/VinylMarket/src/main/java/com/app/VinylMarket/util/FileUploadUtil.java
 /home/hrabar/Desktop/VinylMarket/src/main/java/com/app/VinylMarket/entities/ArtistEntity.java
 /home/hrabar/Desktop/VinylMarket/src/main/java/com/app/VinylMarket/service/UserService.java
 /home/hrabar/Desktop/VinylMarket/src/main/java/com/app/VinylMarket/controller/AuthController.java
@@ -23,3 +24,4 @@
 /home/hrabar/Desktop/VinylMarket/src/main/java/com/app/VinylMarket/security/CustomUserDetailsService.java
 /home/hrabar/Desktop/VinylMarket/src/main/java/com/app/VinylMarket/mappers/ItemMapper.java
 /home/hrabar/Desktop/VinylMarket/src/main/java/com/app/VinylMarket/security/userInfo/AuthenticatonFacade.java
+/home/hrabar/Desktop/VinylMarket/src/main/java/com/app/VinylMarket/security/userInfo/AuthenticationFacadeImpl.java

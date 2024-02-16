@@ -6,7 +6,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-02-14T17:56:21+0100",
+    date = "2024-02-14T21:52:19+0100",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21 (N/A)"
 )
 public class ItemMapperImpl implements ItemMapper {
@@ -29,6 +29,7 @@ public class ItemMapperImpl implements ItemMapper {
         itemEntity.setCountry( itemDto.getCountry() );
         itemEntity.setLabel( itemDto.getLabel() );
         itemEntity.setPrice( itemDto.getPrice() );
+        itemEntity.setPhoto( itemDto.getPhoto() );
 
         return itemEntity;
     }
@@ -51,6 +52,7 @@ public class ItemMapperImpl implements ItemMapper {
         itemDto.setCountry( itemEntity.getCountry() );
         itemDto.setLabel( itemEntity.getLabel() );
         itemDto.setPrice( itemEntity.getPrice() );
+        itemDto.setPhoto( itemEntity.getPhoto() );
 
         return itemDto;
     }

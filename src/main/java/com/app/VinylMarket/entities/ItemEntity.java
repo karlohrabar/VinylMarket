@@ -49,6 +49,9 @@ public class ItemEntity {
     @Column
     private Integer price;
 
+    @Column
+    private String photo;
+
     @ManyToOne
     @JoinColumn(name="user_id")
     private UserEntity userEntity;

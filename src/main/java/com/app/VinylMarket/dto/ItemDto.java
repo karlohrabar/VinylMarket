@@ -2,6 +2,7 @@ package com.app.VinylMarket.dto;
 
 import com.app.VinylMarket.enums.Format;
 import com.app.VinylMarket.enums.Genre;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
@@ -26,4 +27,11 @@ public class ItemDto {
     private String country;
     private String label;
     private Integer price;
+    private String photo;
+
+    public String getPhotoPath(){
+        if(photo == null)
+            return null;
+        return "/item-photos/" + photo;
+    }
 }

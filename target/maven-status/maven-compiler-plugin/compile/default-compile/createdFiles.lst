@@ -1,6 +1,6 @@
-com/app/VinylMarket/security/userInfo/AuthenticatonFacadeImpl.class
 com/app/VinylMarket/mappers/UserMapperImpl.class
 com/app/VinylMarket/mappers/ItemMapperImpl.class
+com/app/VinylMarket/security/userInfo/AuthenticationFacadeImpl.class
 com/app/VinylMarket/service/UserService.class
 com/app/VinylMarket/service/ItemService.class
 com/app/VinylMarket/repository/UserRepository.class
@@ -16,11 +16,13 @@ com/app/VinylMarket/entities/OrdersEntity.class
 com/app/VinylMarket/entities/ItemEntity.class
 com/app/VinylMarket/dto/ItemDto.class
 com/app/VinylMarket/entities/ItemArtistEntity.class
+com/app/VinylMarket/util/FileUploadUtil.class
 com/app/VinylMarket/dto/UserAuthDto.class
 com/app/VinylMarket/security/userInfo/AuthenticatonFacade.class
 com/app/VinylMarket/controller/ItemController.class
 com/app/VinylMarket/entities/ArtistEntity.class
 com/app/VinylMarket/entities/UserEntity.class
+com/app/VinylMarket/util/MvcConfig.class
 com/app/VinylMarket/enums/Role.class
 com/app/VinylMarket/enums/Format.class
 com/app/VinylMarket/MyAppApplication.class

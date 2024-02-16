@@ -35,6 +35,6 @@ public class UserEntity {
     @OneToMany(mappedBy = "userEntity")
     List<OrdersEntity> ordersEntities;
 
-    @OneToMany(mappedBy = "userEntity")
+    @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     List<ItemEntity> itemEntities;
 }
