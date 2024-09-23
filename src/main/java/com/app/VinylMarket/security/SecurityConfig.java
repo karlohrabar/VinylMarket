@@ -28,19 +28,26 @@ public class SecurityConfig implements WebMvcConfigurer{
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
+                .csrf()
+                .disable()
                 .formLogin(form -> form.loginPage("/login")
+                        .permitAll()
                         .loginProcessingUrl("/login")
                         .successHandler(myAuthenticationSuccessHandler()))
                 .authorizeHttpRequests((authorize) ->
                         authorize
-                                .requestMatchers("/register").permitAll()
-                                .requestMatchers("/login").permitAll()
+                                .requestMatchers("/register/**").permitAll()
+                                .requestMatchers("/login/**").permitAll()
                                 .requestMatchers("/user/**").authenticated()
                                 .requestMatchers("/admin/**").authenticated()
                                 .requestMatchers("/item/**").authenticated()
                                 .requestMatchers("/item-photos/**").authenticated())
 
-                .logout(Customizer.withDefaults());
+                .logout((logout) -> logout
+                .logoutSuccessUrl("/login?logout")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+                .permitAll());
 
 
 

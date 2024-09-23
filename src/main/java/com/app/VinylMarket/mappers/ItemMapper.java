@@ -10,6 +10,7 @@ import org.mapstruct.Named;
 @Mapper
 public interface ItemMapper {
 
+    @Mapping(target = "userEntity", ignore = true)
     ItemEntity toEntity(ItemDto itemDto);
 
 

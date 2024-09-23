@@ -56,6 +56,7 @@ public class AuthController {
         }
 
         userService.saveUser(userAuthDto);
+        System.out.println("Registering success!");
         return "redirect:/register?success";
 
     }

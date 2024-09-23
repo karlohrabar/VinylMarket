@@ -2,7 +2,7 @@ package com.app.VinylMarket.controller;
 
 import com.app.VinylMarket.dto.ItemDto;
 import com.app.VinylMarket.entities.UserEntity;
-import com.app.VinylMarket.security.userInfo.AuthenticatonFacade;
+import com.app.VinylMarket.security.userInfo.AuthenticationFacade;
 import com.app.VinylMarket.service.ItemService;
 import com.app.VinylMarket.util.FileUploadUtil;
 import jakarta.validation.Valid;
@@ -25,7 +25,7 @@ public class ItemController {
     private ItemService itemService;
 
     @Autowired
-    private AuthenticatonFacade authenticatonFacade;
+    private AuthenticationFacade authenticationFacade;
     @GetMapping("/create")
     public String showCreationForm(Model model){
 
@@ -33,7 +33,7 @@ public class ItemController {
         return "item_creation";
     }
 
-    @PostMapping("/create")
+    @PostMapping("/createItem")
     public String submitItem(@Valid @ModelAttribute("item") ItemDto itemDto,
                              BindingResult result,
                              Model model,
@@ -41,10 +41,13 @@ public class ItemController {
 
 
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
-        itemDto.setPhoto(fileName);
-        itemService.saveItem(itemDto);
 
         String uploadDir = "item-photos/";
+        String uniqueFilename = itemService.generateUniqueFileName(uploadDir, fileName);
+
+        itemDto.setPhoto(uniqueFilename);
+
+        itemService.saveItem(itemDto);
 
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 

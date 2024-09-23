@@ -9,8 +9,8 @@ com/app/VinylMarket/dto/UserInfoDto.class
 com/app/VinylMarket/enums/Genre.class
 com/app/VinylMarket/repository/ItemRepository.class
 com/app/VinylMarket/mappers/UserMapper.class
-com/app/VinylMarket/controller/AuthController.class
 com/app/VinylMarket/security/CustomUserDetailsService.class
+com/app/VinylMarket/controller/AuthController.class
 com/app/VinylMarket/mappers/ItemMapper.class
 com/app/VinylMarket/entities/OrdersEntity.class
 com/app/VinylMarket/entities/ItemEntity.class

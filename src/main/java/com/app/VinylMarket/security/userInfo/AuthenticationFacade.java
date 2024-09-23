@@ -4,7 +4,7 @@ import org.springframework.security.core.Authentication;
 
 import java.util.UUID;
 
-public interface AuthenticatonFacade {
+public interface AuthenticationFacade {
     Authentication getAuthentication();
 
     UUID getIdFromLoggedInUser();

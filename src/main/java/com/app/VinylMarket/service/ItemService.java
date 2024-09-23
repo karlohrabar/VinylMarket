@@ -2,27 +2,23 @@ package com.app.VinylMarket.service;
 
 import com.app.VinylMarket.dto.ItemDto;
 import com.app.VinylMarket.entities.ItemEntity;
-import com.app.VinylMarket.mappers.ItemMapper;
 import com.app.VinylMarket.mappers.ItemMapperImpl;
 import com.app.VinylMarket.repository.ItemRepository;
 import com.app.VinylMarket.repository.UserRepository;
-import com.app.VinylMarket.security.userInfo.AuthenticatonFacade;
+import com.app.VinylMarket.security.userInfo.AuthenticationFacade;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 
 @Service
 public class ItemService {
 
     @Autowired
-    private AuthenticatonFacade authenticatonFacade;
+    private AuthenticationFacade authenticationFacade;
     @Autowired
     private ItemRepository itemRepository;
 
@@ -30,7 +26,7 @@ public class ItemService {
     private UserRepository userRepository;
     public void saveItem(ItemDto itemDto){
 
-        var username = authenticatonFacade.getAuthentication().getName();
+        var username = authenticationFacade.getAuthentication().getName();
         var user = userRepository.findByUsername(username);
 
         if(user.isPresent()){
@@ -47,6 +43,20 @@ public class ItemService {
         return itemRepository.findAll().stream().map(
                 mapper::toDto
         ).toList();
+    }
+
+    public String generateUniqueFileName(String uploadDir, String fileName) {
+        String extension = "";
+        String baseName = fileName;
+
+        int dotIndex = fileName.lastIndexOf(".");
+        if (dotIndex > 0 && dotIndex < fileName.length() - 1) {
+            extension = fileName.substring(dotIndex);
+            baseName = fileName.substring(0, dotIndex);
+        }
+        String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+
+        return baseName + "_" + timestamp + extension;
     }
 
     public List<ItemEntity> getAllEntities() {

@@ -24,7 +24,8 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
 
-    public void saveUser(UserAuthDto userAuthDto){
+    public void saveUser(UserAuthDto userAuthDto) {
+
         var mapper = new UserMapperImpl();
 
         var user = mapper.toEntity(userAuthDto);

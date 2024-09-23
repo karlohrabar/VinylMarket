@@ -6,8 +6,8 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-02-14T21:52:19+0100",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21 (N/A)"
+    date = "2024-09-05T16:37:59+0200",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.4 (Ubuntu)"
 )
 public class ItemMapperImpl implements ItemMapper {
 
