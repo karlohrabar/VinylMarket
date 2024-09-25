@@ -2,6 +2,8 @@ package com.app.VinylMarket.entities;
 
 import com.app.VinylMarket.enums.Format;
 import com.app.VinylMarket.enums.Genre;
+import com.app.VinylMarket.enums.ItemStatus;
+import com.app.VinylMarket.service.ItemService;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -30,6 +32,10 @@ public class ItemEntity {
     @Column
     @Enumerated(EnumType.STRING)
     private Genre genre;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private ItemStatus itemStatus = ItemStatus.IN_STOCK;
 
     @Column
     private Integer year_of_release;

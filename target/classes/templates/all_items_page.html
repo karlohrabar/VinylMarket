@@ -11,33 +11,50 @@
 </head>
 
 <body>
-
 <div class="container mt-5">
-    <h2>All products:</h2>
+    <h2>All Products:</h2>
 
-    <form th:action="@{/item/allItems}" th:method="get" th:object="${items}">
-        <div>
-        <tr th:each="item: ${items}">
-            <td th:text="${item.title}" />
-            <td th:text="${item.format.getDisplayValue()}" />
-            <td th:text="${item.rpm}" />
-            <td th:text="${item.genre.getDisplayValue()}" />
-            <td th:text="${item.year_of_release}" />
-            <td th:text="${item.condition_of_item}" />
-            <td th:text="${item.other_info}" />
-            <td th:text="${item.country}" />
-            <td th:text="${item.label}" />
-            <td th:text="${item.price}"/>
-
-            <img th:src="${item.PhotoPath}" width="175" height="175"/>
-            <br>
-
-
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Format</th>
+            <th>RPM</th>
+            <th>Genre</th>
+            <th>Year of Release</th>
+            <th>Condition</th>
+            <th>Other Info</th>
+            <th>Country</th>
+            <th>Label</th>
+            <th>Price</th>
+            <th>Photo</th>
+            <th>Action</th> <!-- Column for action buttons -->
         </tr>
-
-        </div>
-
-    </form>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${items}">
+            <td th:text="${item.title}"></td>
+            <td th:text="${item.format.getDisplayValue()}"></td>
+            <td th:text="${item.rpm}"></td>
+            <td th:text="${item.genre.getDisplayValue()}"></td>
+            <td th:text="${item.year_of_release}"></td>
+            <td th:text="${item.condition_of_item}"></td>
+            <td th:text="${item.other_info}"></td>
+            <td th:text="${item.country}"></td>
+            <td th:text="${item.label}"></td>
+            <td th:text="${item.price}"></td>
+            <td>
+                <img th:src="${item.PhotoPath}" width="175" height="175" alt="Item Photo"/>
+            </td>
+            <td>
+                <!-- Form to mark item as sold -->
+                <form th:action="@{/item/sell/{id}(id=${item.id})}" method="post">
+                    <button type="submit" class="btn btn-danger">Mark as Sold</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 </body>
 

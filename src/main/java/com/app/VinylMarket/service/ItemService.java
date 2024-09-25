@@ -2,16 +2,19 @@ package com.app.VinylMarket.service;
 
 import com.app.VinylMarket.dto.ItemDto;
 import com.app.VinylMarket.entities.ItemEntity;
+import com.app.VinylMarket.enums.ItemStatus;
 import com.app.VinylMarket.mappers.ItemMapperImpl;
 import com.app.VinylMarket.repository.ItemRepository;
 import com.app.VinylMarket.repository.UserRepository;
 import com.app.VinylMarket.security.userInfo.AuthenticationFacade;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 
 @Service
@@ -24,6 +27,14 @@ public class ItemService {
 
     @Autowired
     private UserRepository userRepository;
+
+    public void changeItemStatusToSold(UUID id){
+        ItemEntity item = itemRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Item not found"));
+        item.setItemStatus(ItemStatus.SOLD);
+        itemRepository.save(item);
+    }
+
     public void saveItem(ItemDto itemDto){
 
         var username = authenticationFacade.getAuthentication().getName();
@@ -33,6 +44,7 @@ public class ItemService {
             var mapper = new ItemMapperImpl();
             var item = mapper.toEntity(itemDto);
             item.setUserEntity(user.get());
+            item.setItemStatus(ItemStatus.IN_STOCK);
             itemRepository.save(item);
         }
 
@@ -43,6 +55,14 @@ public class ItemService {
         return itemRepository.findAll().stream().map(
                 mapper::toDto
         ).toList();
+    }
+
+    public List<ItemDto> getAllInStock(){
+        var mapper = new ItemMapperImpl();
+
+        List<ItemEntity> inStockItems = itemRepository.findByItemStatus(ItemStatus.IN_STOCK);
+
+        return inStockItems.stream().map(mapper::toDto).toList();
     }
 
     public String generateUniqueFileName(String uploadDir, String fileName) {

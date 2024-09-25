@@ -2,6 +2,7 @@ package com.app.VinylMarket.dto;
 
 import com.app.VinylMarket.enums.Format;
 import com.app.VinylMarket.enums.Genre;
+import com.app.VinylMarket.enums.ItemStatus;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -11,11 +12,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Range;
 
+import java.util.UUID;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ItemDto {
 
+    private UUID id;
     private String title;
     private Format format;
     private Integer rpm;
@@ -28,6 +32,7 @@ public class ItemDto {
     private String label;
     private Integer price;
     private String photo;
+    private ItemStatus itemStatus;
 
     public String getPhotoPath(){
         if(photo == null)

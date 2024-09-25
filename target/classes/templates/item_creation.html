@@ -24,6 +24,10 @@
         <div class="alert alert-success">You've successfully submitted your record! </div>
     </div>
 
+    <form th:action="@{/user}" method="get">
+        <button type="submit" class="btn btn-danger">Go Back</button>
+    </form>
+
     <form th:action="@{/item/createItem}" method="post" th:object="${item}" enctype="multipart/form-data">
 
 

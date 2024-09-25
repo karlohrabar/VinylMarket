@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/item")
@@ -51,13 +52,20 @@ public class ItemController {
 
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 
-        return "redirect:/create?success";
+        return "redirect:/item/create?success";
     }
 
 
     @GetMapping("/allItems")
     public String showAllItems(Model model){
-        model.addAttribute("items", itemService.getAllDtos());
+        model.addAttribute("items", itemService.getAllInStock());
         return "all_items_page";
+    }
+
+    @PostMapping("/sell/{id}")
+    public String sellItem(@PathVariable UUID id){
+        System.out.println("Selling item with ID: " + id);
+        itemService.changeItemStatusToSold(id);
+        return "redirect:/item/allItems";
     }
 }

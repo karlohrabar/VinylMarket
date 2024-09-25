@@ -6,7 +6,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-09-05T16:37:59+0200",
+    date = "2024-09-25T20:15:58+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.4 (Ubuntu)"
 )
 public class ItemMapperImpl implements ItemMapper {
@@ -19,10 +19,12 @@ public class ItemMapperImpl implements ItemMapper {
 
         ItemEntity itemEntity = new ItemEntity();
 
+        itemEntity.setId( itemDto.getId() );
         itemEntity.setTitle( itemDto.getTitle() );
         itemEntity.setFormat( itemDto.getFormat() );
         itemEntity.setRpm( itemDto.getRpm() );
         itemEntity.setGenre( itemDto.getGenre() );
+        itemEntity.setItemStatus( itemDto.getItemStatus() );
         itemEntity.setYear_of_release( itemDto.getYear_of_release() );
         itemEntity.setCondition_of_item( itemDto.getCondition_of_item() );
         itemEntity.setOther_info( itemDto.getOther_info() );
@@ -42,6 +44,7 @@ public class ItemMapperImpl implements ItemMapper {
 
         ItemDto itemDto = new ItemDto();
 
+        itemDto.setId( itemEntity.getId() );
         itemDto.setTitle( itemEntity.getTitle() );
         itemDto.setFormat( itemEntity.getFormat() );
         itemDto.setRpm( itemEntity.getRpm() );
@@ -53,6 +56,7 @@ public class ItemMapperImpl implements ItemMapper {
         itemDto.setLabel( itemEntity.getLabel() );
         itemDto.setPrice( itemEntity.getPrice() );
         itemDto.setPhoto( itemEntity.getPhoto() );
+        itemDto.setItemStatus( itemEntity.getItemStatus() );
 
         return itemDto;
     }
