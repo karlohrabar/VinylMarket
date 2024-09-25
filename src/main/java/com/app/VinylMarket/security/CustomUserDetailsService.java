@@ -28,7 +28,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         if (userEntity.isPresent()) {
             UserEntity user = userEntity.get();
             System.out.println("Login successful!");
-            return new User(user.getUsername(),
+            return new CustomUserDetails(user.getId(),
+                    user.getUsername(),
                     user.getPasswd(),
                     mapRoleToGrantedAuthority(user.getRole()));
         } else {

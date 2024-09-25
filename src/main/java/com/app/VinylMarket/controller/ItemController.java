@@ -56,16 +56,16 @@ public class ItemController {
     }
 
 
-    @GetMapping("/allItems")
+    @GetMapping("/myItems")
     public String showAllItems(Model model){
-        model.addAttribute("items", itemService.getAllInStock());
-        return "all_items_page";
+        model.addAttribute("items", itemService.getItemsByCurrentUser());
+        return "my_items";
     }
 
     @PostMapping("/sell/{id}")
     public String sellItem(@PathVariable UUID id){
         System.out.println("Selling item with ID: " + id);
         itemService.changeItemStatusToSold(id);
-        return "redirect:/item/allItems";
+        return "redirect:/item/myItems";
     }
 }

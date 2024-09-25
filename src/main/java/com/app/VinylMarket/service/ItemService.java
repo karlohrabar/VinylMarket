@@ -6,15 +6,20 @@ import com.app.VinylMarket.enums.ItemStatus;
 import com.app.VinylMarket.mappers.ItemMapperImpl;
 import com.app.VinylMarket.repository.ItemRepository;
 import com.app.VinylMarket.repository.UserRepository;
+import com.app.VinylMarket.security.CustomUserDetails;
 import com.app.VinylMarket.security.userInfo.AuthenticationFacade;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -55,6 +60,17 @@ public class ItemService {
         return itemRepository.findAll().stream().map(
                 mapper::toDto
         ).toList();
+    }
+
+    public List<ItemDto> getItemsByCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+
+        var mapper = new ItemMapperImpl();
+        return itemRepository.findByUser(userDetails.getId()).stream()
+                .map(mapper::toDto)
+                .collect(Collectors.toList());
+
     }
 
     public List<ItemDto> getAllInStock(){
