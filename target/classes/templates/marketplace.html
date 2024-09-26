@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All In-Stock Items</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        /* Add custom styles here if needed */
+    </style>
+    <script>
+        // Simple client-side filtering
+        function filterItems() {
+            const input = document.getElementById("searchInput");
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById("itemsTable");
+            const tr = table.getElementsByTagName("tr");
+
+            for (let i = 1; i < tr.length; i++) { // Skip header row
+                const td = tr[i].getElementsByTagName("td")[0]; // Search in the first column (title)
+                if (td) {
+                    const txtValue = td.textContent || td.innerText;
+                    tr[i].style.display = txtValue.toLowerCase().includes(filter) ? "" : "none";
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="container mt-5">
+    <h2>All In-Stock Items</h2>
+
+    <input type="text" id="searchInput" class="form-control mb-3" onkeyup="filterItems()" placeholder="Search items by name" />
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped" id="itemsTable">
+            <thead class="thead-dark">
+            <tr>
+                <th>Title</th>
+                <th>Format</th>
+                <th>RPM</th>
+                <th>Genre</th>
+                <th>Year</th>
+                <th>Condition</th>
+                <th>Other Info</th>
+                <th>Country</th>
+                <th>Label</th>
+                <th>Price</th>
+                <th>Buy</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${items}">
+                <td th:text="${item.title}"></td>
+                <td th:text="${item.format.getDisplayValue()}"></td>
+                <td th:text="${item.rpm}"></td>
+                <td th:text="${item.genre.getDisplayValue()}"></td>
+                <td th:text="${item.year_of_release}"></td>
+                <td th:text="${item.condition_of_item}"></td>
+                <td th:text="${item.other_info}"></td>
+                <td th:text="${item.country}"></td>
+                <td th:text="${item.label}"></td>
+                <td th:text="${item.price}"></td>
+                <td>
+                    <a th:href="@{/item/details/{id}(id=${item.id})}" class="btn buy-button">Buy</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

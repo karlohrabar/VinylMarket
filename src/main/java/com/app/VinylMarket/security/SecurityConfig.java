@@ -41,7 +41,11 @@ public class SecurityConfig implements WebMvcConfigurer{
                                 .requestMatchers("/user/**").authenticated()
                                 .requestMatchers("/admin/**").authenticated()
                                 .requestMatchers("/item/**").authenticated()
-                                .requestMatchers("/item-photos/**").authenticated())
+                                .requestMatchers("/item-photos/**").authenticated()
+                                .requestMatchers("/payment/**").authenticated()
+                                .requestMatchers("/pendingOrders").authenticated()
+                                .requestMatchers("/buyerOrders").authenticated()
+                                .requestMatchers("/seller/**").authenticated())
 
                 .logout((logout) -> logout
                 .logoutSuccessUrl("/login?logout")

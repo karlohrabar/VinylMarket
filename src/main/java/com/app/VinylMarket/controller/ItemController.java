@@ -1,7 +1,7 @@
 package com.app.VinylMarket.controller;
 
 import com.app.VinylMarket.dto.ItemDto;
-import com.app.VinylMarket.entities.UserEntity;
+import com.app.VinylMarket.entities.ItemEntity;
 import com.app.VinylMarket.security.userInfo.AuthenticationFacade;
 import com.app.VinylMarket.service.ItemService;
 import com.app.VinylMarket.util.FileUploadUtil;
@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 
 @Controller
@@ -57,10 +59,17 @@ public class ItemController {
 
 
     @GetMapping("/myItems")
-    public String showAllItems(Model model){
+    public String showMyItems(Model model){
         model.addAttribute("items", itemService.getItemsByCurrentUser());
         return "my_items";
     }
+
+    @GetMapping("/marketplace")
+    public String showMarketplace(Model model){
+        model.addAttribute("items", itemService.getItemsNotByCurrentUser());
+        return "marketplace";
+    }
+
 
     @PostMapping("/sell/{id}")
     public String sellItem(@PathVariable UUID id){
@@ -68,4 +77,6 @@ public class ItemController {
         itemService.changeItemStatusToSold(id);
         return "redirect:/item/myItems";
     }
+
+
 }

@@ -32,9 +32,9 @@ public class UserEntity {
     @Column
     private String country;
 
-    @OneToMany(mappedBy = "userEntity")
-    List<OrdersEntity> ordersEntities;
-
     @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     List<ItemEntity> itemEntities;
+
+    @OneToMany(mappedBy = "buyer")
+    private List<OrderEntity> orders;
 }

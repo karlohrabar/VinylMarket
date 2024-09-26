@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:border-radius="http://www.w3.org/1999/xhtml"
+      xmlns:background-color="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -12,7 +13,7 @@
 
 <body>
 <div class="container mt-5">
-    <h2>All Products:</h2>
+    <h2>My Products:</h2>
 
     <table class="table">
         <thead>
@@ -28,7 +29,7 @@
             <th>Label</th>
             <th>Price</th>
             <th>Photo</th>
-            <th>Action</th> <!-- Column for action buttons -->
+            <th>Status</th>
         </tr>
         </thead>
         <tbody>
@@ -47,10 +48,12 @@
                 <img th:src="${item.PhotoPath}" width="175" height="175" alt="Item Photo"/>
             </td>
             <td>
-                <!-- Form to mark item as sold -->
-                <form th:action="@{/item/sell/{id}(id=${item.id})}" method="post">
-                    <button type="submit" class="btn btn-danger">Mark as Sold</button>
-                </form>
+                <span th:if="${item.itemStatus == T(com.app.VinylMarket.enums.ItemStatus).SOLD}">Item sold / Withdrawn</span>
+                <span th:if="${item.itemStatus != T(com.app.VinylMarket.enums.ItemStatus).SOLD}">
+                    <form th:action="@{/item/sell/{id}(id=${item.id})}" method="post">
+            <button type="submit" style="border-radius: 5px; background-color:red;">Mark as Sold / Withdraw the Product</button>
+        </form>
+    </span>
             </td>
         </tr>
         </tbody>

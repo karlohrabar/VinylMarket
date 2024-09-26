@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Seller's Orders</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2>All Orders</h2>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th>Order ID</th>
+                <th>Item Title</th>
+                <th>Buyer</th>
+                <th>Order Date & Time</th>
+                <th>Order Status</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="order : ${orders}">
+                <td th:text="${order.id}"></td>
+                <td th:text="${order.itemTitle}"></td>
+                <td th:text="${order.buyerUsername}"></td>
+                <td th:text="${order.timeStamp}"></td>
+                <td th:text="${order.orderStatus}"></td>
+                <td>
+                    <!-- Show buttons for Pending orders -->
+                    <form th:action="@{/seller/approve/{orderId}(orderId=${order.id})}" method="post" th:if="${order.orderStatus == 'PENDING'}">
+                        <button type="submit" class="btn btn-success">Approve</button>
+                    </form>
+
+                    <form th:action="@{/seller/reject/{orderId}(orderId=${order.id})}" method="post" th:if="${order.orderStatus == 'PENDING'}">
+                        <button type="submit" class="btn btn-danger">Reject</button>
+                    </form>
+
+                    <!-- Show statuses for Approved/Rejected orders -->
+                    <span th:if="${order.orderStatus == 'APPROVED'}">Approved</span>
+                    <span th:if="${order.orderStatus == 'REJECTED'}">Rejected</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

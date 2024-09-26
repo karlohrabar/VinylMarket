@@ -12,12 +12,13 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -40,6 +41,10 @@ public class ItemService {
         itemRepository.save(item);
     }
 
+    public Optional<ItemEntity> findById(UUID id){
+        return itemRepository.findById(id);
+    }
+
     public void saveItem(ItemDto itemDto){
 
         var username = authenticationFacade.getAuthentication().getName();
@@ -55,31 +60,33 @@ public class ItemService {
 
     }
 
-    public List<ItemDto> getAllDtos() {
-        var mapper = new ItemMapperImpl();
-        return itemRepository.findAll().stream().map(
-                mapper::toDto
-        ).toList();
-    }
-
     public List<ItemDto> getItemsByCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
 
+        var currentUser = userRepository.findById(userDetails.getId()).orElseThrow(()-> new UsernameNotFoundException("User not found!"));
+
         var mapper = new ItemMapperImpl();
-        return itemRepository.findByUser(userDetails.getId()).stream()
+        return itemRepository.findByUser(currentUser).stream()
                 .map(mapper::toDto)
                 .collect(Collectors.toList());
 
     }
 
-    public List<ItemDto> getAllInStock(){
+    public List<ItemDto> getItemsNotByCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+
+        var currentUser = userRepository.findById(userDetails.getId()).orElseThrow(()-> new UsernameNotFoundException("User not found!"));
+
         var mapper = new ItemMapperImpl();
+        return itemRepository.findInStockItemsNotByUser(currentUser).stream()
+                .map(mapper::toDto)
+                .collect(Collectors.toList());
 
-        List<ItemEntity> inStockItems = itemRepository.findByItemStatus(ItemStatus.IN_STOCK);
-
-        return inStockItems.stream().map(mapper::toDto).toList();
     }
+
+
 
     public String generateUniqueFileName(String uploadDir, String fileName) {
         String extension = "";

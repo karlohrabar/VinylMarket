@@ -60,6 +60,7 @@ public class ItemEntity {
 
     @ManyToOne
     @JoinColumn(name="user_id")
-    private UserEntity userEntity;
+    private UserEntity userEntity; //seller
+
 
 }

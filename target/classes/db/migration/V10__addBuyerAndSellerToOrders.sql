@@ -1,0 +1,6 @@
+ALTER TABLE Orders
+ADD COLUMN seller_id VARCHAR(255),
+ADD CONSTRAINT fk_seller FOREIGN KEY (seller_id) REFERENCES User(id);
+
+ALTER TABLE Orders
+CHANGE COLUMN user_id buyer_id VARCHAR(255);

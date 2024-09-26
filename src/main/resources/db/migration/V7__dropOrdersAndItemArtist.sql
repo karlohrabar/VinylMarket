@@ -1,0 +1,12 @@
+
+ALTER TABLE ItemArtist DROP FOREIGN KEY `ItemArtist_ibfk_1`;
+
+ALTER TABLE ItemArtist DROP FOREIGN KEY `ItemArtist_ibfk_2`;
+
+ALTER TABLE Orders DROP FOREIGN KEY `Orders_ibfk_1`;
+
+ALTER TABLE Orders DROP FOREIGN KEY `Orders_ibfk_2`;
+
+
+DROP TABLE IF EXISTS ItemArtist;
+DROP TABLE IF EXISTS Orders;
