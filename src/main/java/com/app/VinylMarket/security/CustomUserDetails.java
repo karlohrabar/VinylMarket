@@ -9,22 +9,21 @@ import java.util.UUID;
 
 public class CustomUserDetails implements UserDetails {
 
-    // Getter for ID
+
     @Getter
-    private final UUID id; // Add this field
+    private final UUID id;
     private final String username;
     private final String password;
     private final Collection<? extends GrantedAuthority> authorities;
 
-    // Constructor
     public CustomUserDetails(UUID id, String username, String password, Collection<? extends GrantedAuthority> authorities) {
-        this.id = id; // Initialize user ID
+        this.id = id;
         this.username = username;
         this.password = password;
         this.authorities = authorities;
     }
 
-    // Other overridden methods from UserDetails...
+
     @Override
     public String getUsername() {
         return username;

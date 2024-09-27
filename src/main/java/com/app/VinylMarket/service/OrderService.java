@@ -27,34 +27,32 @@ public class OrderService {
     private ItemRepository itemRepository;
 
     @Autowired
-    private UserRepository userRepository; // Ensure you have this to fetch UserEntity
+    private UserRepository userRepository;
 
 
     public void createOrder(UUID itemId, UUID buyerId) {
-        // Create a new OrderEntity for the item
         OrderEntity order = new OrderEntity();
 
-        // Fetch the item to set it in the order
         ItemEntity item = itemRepository.findById(itemId)
-                .orElseThrow(() -> new EntityNotFoundException("Item not found")); // Set item
+                .orElseThrow(() -> new EntityNotFoundException("Item not found"));
         order.setItem(item);
 
-        UserEntity seller = item.getUserEntity(); // Assuming you have a method to get the seller
-        order.setSeller(seller); // Set the seller
+        UserEntity seller = item.getUserEntity();
+        order.setSeller(seller);
         order.setBuyer(userRepository.findById(buyerId)
-                .orElseThrow(() -> new EntityNotFoundException("User not found"))); // Set buyer
+                .orElseThrow(() -> new EntityNotFoundException("User not found")));
         order.setStatus(OrderStatus.PENDING);
 
         orderRepository.save(order);
 
-        item.setItemStatus(ItemStatus.PENDING); // Assuming you have a method to set item status
+        item.setItemStatus(ItemStatus.PENDING);
         itemRepository.save(item);
     }
 
     public List<OrderDto> getAllSellerOrders(UUID sellerId) {
         return orderRepository.findBySeller(sellerId)
                 .stream()
-                .map(OrderMapper::toDto)  // Convert each OrderEntity to OrderDto
+                .map(OrderMapper::toDto)
                 .collect(Collectors.toList());
     }
 
@@ -66,14 +64,14 @@ public class OrderService {
     }
 
     public void approveOrder(UUID orderId) {
-        OrderEntity order = orderRepository.findById(orderId).orElseThrow(() -> new EntityNotFoundException("Order not found!"));
+        var order = orderRepository.findById(orderId).orElseThrow(() -> new EntityNotFoundException("Order not found!"));
         order.setStatus(OrderStatus.APPROVED);
         order.getItem().setItemStatus(ItemStatus.SOLD);
         orderRepository.save(order);
     }
 
     public void rejectOrder(UUID orderID){
-        OrderEntity order = orderRepository.findById(orderID).orElseThrow(()->new EntityNotFoundException("Order not found!"));
+        var order = orderRepository.findById(orderID).orElseThrow(()->new EntityNotFoundException("Order not found!"));
         order.setStatus(OrderStatus.REJECTED);
         order.getItem().setItemStatus(ItemStatus.IN_STOCK);
         orderRepository.save(order);

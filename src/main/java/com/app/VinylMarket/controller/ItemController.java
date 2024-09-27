@@ -27,8 +27,6 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
-    @Autowired
-    private AuthenticationFacade authenticationFacade;
     @GetMapping("/create")
     public String showCreationForm(Model model){
 

@@ -66,9 +66,9 @@ public class OrderController {
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
 
         UUID sellerId = userDetails.getId();
-        List<OrderDto> orders = orderService.getAllSellerOrders(sellerId);  // Get all seller orders (pending, approved, rejected)
+        List<OrderDto> orders = orderService.getAllSellerOrders(sellerId);
         model.addAttribute("orders", orders);
-        return "mySellerOrders";  // Thymeleaf page to display all orders
+        return "mySellerOrders";
     }
 
     @GetMapping("/buyerOrders")
@@ -77,11 +77,10 @@ public class OrderController {
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         UUID buyerId = userDetails.getId();
 
-        // Fetch all orders for the buyer
         List<OrderDto> orders = orderService.getAllBuyerOrders(buyerId);
 
         model.addAttribute("orders", orders);
-        return "myBuyerOrders";  // Thymeleaf template to show the orders
+        return "myBuyerOrders";
     }
 
     @PostMapping("seller/approve/{id}")

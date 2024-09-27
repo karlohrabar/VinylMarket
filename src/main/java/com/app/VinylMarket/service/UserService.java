@@ -45,7 +45,7 @@ public class UserService {
         var mapper = new UserMapperImpl();
         List<UserEntity> users = userRepository.findAll();
         return users.stream().
-                map((user)-> mapper.toDto(user))
+                map(mapper::toDto)
                 .collect(Collectors.toList());
     }
 
