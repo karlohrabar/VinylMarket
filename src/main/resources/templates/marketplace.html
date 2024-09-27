@@ -23,6 +23,32 @@
                 }
             }
         }
+
+    let isAscending = true;
+
+    function sortTable() {
+        const table = document.getElementById("itemsTable");
+        const rows = Array.from(table.getElementsByTagName("tr")).slice(1);         const priceIndex = 9;
+
+        rows.sort(function(a, b) {
+            const priceA = parseFloat(a.getElementsByTagName("td")[priceIndex].textContent);
+            const priceB = parseFloat(b.getElementsByTagName("td")[priceIndex].textContent);
+
+            if (isNaN(priceA) || isNaN(priceB)) {
+                return 0; // Handle rows without valid prices
+            }
+
+            return isAscending ? priceA - priceB : priceB - priceA;
+        });
+
+        for (const row of rows) {
+            table.appendChild(row);
+        }
+
+
+        isAscending = !isAscending;
+    }
+
     </script>
 </head>
 <body>
@@ -47,7 +73,9 @@
                 <th>Other Info</th>
                 <th>Country</th>
                 <th>Label</th>
-                <th>Price</th>
+                <th>
+                    <button class="btn btn-link" onclick="sortTable()">Price</button>
+                </th>
                 <th>Photo</th>
                 <th>Buy</th>
             </tr>
