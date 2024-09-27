@@ -20,7 +20,7 @@
         <tr th:each="order : ${orders}">
             <td th:text="${order.itemTitle}"></td>
             <td th:text="${order.orderStatus}"></td>
-            <td th:text="${#dates.format(order.timeStamp, 'dd-MM-yyyy HH:mm')}"></td>
+            <td th:text="${#temporals.format(order.timeStamp, 'dd-MM-yyyy HH:mm')}"></td>
         </tr>
         </tbody>
     </table>

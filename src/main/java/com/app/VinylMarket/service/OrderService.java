@@ -11,11 +11,9 @@ import com.app.VinylMarket.repository.ItemRepository;
 import com.app.VinylMarket.repository.OrderRepository;
 import com.app.VinylMarket.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
-import org.hibernate.cache.spi.support.AbstractReadWriteAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -54,7 +52,8 @@ public class OrderService {
     }
 
     public List<OrderDto> getAllSellerOrders(UUID sellerId) {
-        return orderRepository.findBySeller(sellerId).stream()
+        return orderRepository.findBySeller(sellerId)
+                .stream()
                 .map(OrderMapper::toDto)  // Convert each OrderEntity to OrderDto
                 .collect(Collectors.toList());
     }

@@ -1,27 +1,21 @@
 package com.app.VinylMarket.controller;
 
 
-import ch.qos.logback.core.net.SyslogOutputStream;
 import com.app.VinylMarket.dto.OrderDto;
 import com.app.VinylMarket.entities.ItemEntity;
-import com.app.VinylMarket.entities.OrderEntity;
-import com.app.VinylMarket.enums.OrderStatus;
 import com.app.VinylMarket.security.CustomUserDetails;
 import com.app.VinylMarket.security.userInfo.AuthenticationFacade;
 import com.app.VinylMarket.service.ItemService;
 import com.app.VinylMarket.service.OrderService;
 import com.app.VinylMarket.service.UserService;
-import jakarta.persistence.criteria.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;

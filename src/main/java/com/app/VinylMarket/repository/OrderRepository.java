@@ -13,7 +13,7 @@ public interface OrderRepository extends JpaRepository<OrderEntity, UUID> {
     @Query("SELECT o FROM OrderEntity o WHERE o.item.userEntity.id = :sellerId")
     List<OrderEntity> findBySeller(@Param("sellerId") UUID sellerId);
 
-    @Query("SELECT o FROM OrderEntity o WHERE o.item.userEntity.id = :buyerId")
+    @Query("SELECT o FROM OrderEntity o WHERE o.buyer.id = :buyerId")
     List<OrderEntity> findByBuyer(@Param("buyerId") UUID buyerId);
 
 }

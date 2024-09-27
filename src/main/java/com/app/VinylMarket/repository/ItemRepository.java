@@ -2,14 +2,11 @@ package com.app.VinylMarket.repository;
 
 import com.app.VinylMarket.entities.ItemEntity;
 import com.app.VinylMarket.entities.UserEntity;
-import com.app.VinylMarket.enums.ItemStatus;
-import org.mapstruct.control.MappingControl;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 public interface ItemRepository extends JpaRepository<ItemEntity, UUID> {

@@ -9,6 +9,7 @@ public abstract class OrderMapper {
         var dto = new OrderDto();
         dto.setId(orderEntity.getId());
         dto.setOrderStatus(orderEntity.getStatus().toString());
+        dto.setSellerUsername(orderEntity.getSeller().getUsername());
         dto.setBuyerUsername(orderEntity.getBuyer().getUsername());
         dto.setItemTitle(orderEntity.getItem().getTitle());
         dto.setTimeStamp(orderEntity.getTime_stamp());

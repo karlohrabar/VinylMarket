@@ -20,6 +20,7 @@ public class OrderDto {
     private UUID id;                      // Order ID
     private String itemTitle;             // Item title
     private String buyerUsername;         // Buyer's username
+    private String sellerUsername;
     private LocalDateTime timeStamp;      // Order timestamp
     private String orderStatus;
 }
