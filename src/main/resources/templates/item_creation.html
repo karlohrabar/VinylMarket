@@ -13,8 +13,10 @@
 
 <body>
 
+<div th:replace="fragments/navbar :: navbar"></div>
+
 <div class="container mt-5">
-    <h2 class="mb-4">Vinyl Record Information</h2>
+    <h2 class="mb-4">Sell a record</h2>
 
     <div th:if="${param.error}">
         <div class="alert alert-danger">Something went wrong.</div>

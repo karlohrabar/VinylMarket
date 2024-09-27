@@ -28,8 +28,11 @@
     </script>
 </head>
 <body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
 <div class="container mt-5">
-    <h2>All In-Stock Items</h2>
+    <h2>Marketplace</h2>
 
     <input type="text" id="searchInput" class="form-control mb-3" onkeyup="filterItems()" placeholder="Search items by name" />
 

@@ -3,22 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+          content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Vinyl Market - Home</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-<h2>My header</h2>
 
-<a th:href="@{/item/create}">Sell a record</a>
-<a th:href="@{/item/myItems}">List my records for sale</a>
-<a th:href="@{/item/marketplace}">Check the marketplace</a>
-<a th:href="@{/pendingOrders}">Seller's page</a>
-<a th:href="@{/buyerOrders}">My orders</a>
-<a href="/logout">Logout</a>
+<div th:replace="fragments/navbar :: navbar"></div>
+<!-- Main Content Section -->
+<div class="container mt-5">
+    <div class="text-center">
+        <h1 class="display-4">Welcome to the Vinyl Market</h1>
+        <p class="lead">Buy, Sell, and Explore Vintage Vinyl Records</p>
+        <hr class="my-4">
+    </div>
 
+    <!-- Features Section -->
+    <div class="row text-center">
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Sell Your Records</h5>
+                    <p class="card-text">Got vinyl to sell? List them and reach a community of collectors.</p>
+                    <a class="btn btn-primary" th:href="@{/item/create}">Sell a Record</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Browse the Marketplace</h5>
+                    <p class="card-text">Explore a vast collection of vinyl records from different sellers.</p>
+                    <a class="btn btn-success" th:href="@{/item/marketplace}">Marketplace</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Manage Your Orders</h5>
+                    <p class="card-text">Check the status of your orders and manage your sales.</p>
+                    <a class="btn btn-warning" th:href="@{/pendingOrders}">Seller's Page</a>
+                    <a class="btn btn-info mt-2" th:href="@{/buyerOrders}">My Orders</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

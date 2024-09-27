@@ -9,9 +9,19 @@
 
     <!-- Bootstrap CSS link (you can replace this link with the version you prefer) -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+    .item-photo {
+    max-width: 100%;
+    height: auto;
+    border-radius:
+    }
+    </style>
 </head>
 
 <body>
+<div th:replace="fragments/navbar :: navbar"></div>
+
 <div class="container mt-5">
     <h2>My Products:</h2>
 
@@ -45,7 +55,7 @@
             <td th:text="${item.label}"></td>
             <td th:text="${item.price}"></td>
             <td>
-                <img th:src="${item.photoPath}"  alt="Item Photo" width="175" height="175"/>
+                <img th:src="${item.photoPath}"  alt="Item Photo" width="175" height="175" class="item-photo"/>
             </td>
             <td>
                 <span th:if="${item.itemStatus == T(com.app.VinylMarket.enums.ItemStatus).SOLD}">Item sold / Withdrawn</span>
