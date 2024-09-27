@@ -47,6 +47,7 @@
                 <th>Country</th>
                 <th>Label</th>
                 <th>Price</th>
+                <th>Photo</th>
                 <th>Buy</th>
             </tr>
             </thead>
@@ -62,6 +63,9 @@
                 <td th:text="${item.country}"></td>
                 <td th:text="${item.label}"></td>
                 <td th:text="${item.price}"></td>
+                <td>
+                    <img th:src="${item.photoPath}"  alt="Item Photo" width="175" height="175"/>
+                </td>
                 <td>
                     <a th:href="@{/item/details/{id}(id=${item.id})}" class="btn buy-button">Buy</a>
                 </td>

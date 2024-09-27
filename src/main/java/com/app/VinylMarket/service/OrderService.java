@@ -68,6 +68,7 @@ public class OrderService {
     public void approveOrder(UUID orderId) {
         OrderEntity order = orderRepository.findById(orderId).orElseThrow(() -> new EntityNotFoundException("Order not found!"));
         order.setStatus(OrderStatus.APPROVED);
+        order.getItem().setItemStatus(ItemStatus.SOLD);
         orderRepository.save(order);
     }
 

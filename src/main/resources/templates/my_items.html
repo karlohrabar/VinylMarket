@@ -45,7 +45,7 @@
             <td th:text="${item.label}"></td>
             <td th:text="${item.price}"></td>
             <td>
-                <img th:src="${item.PhotoPath}" width="175" height="175" alt="Item Photo"/>
+                <img th:src="${item.photoPath}"  alt="Item Photo" width="175" height="175"/>
             </td>
             <td>
                 <span th:if="${item.itemStatus == T(com.app.VinylMarket.enums.ItemStatus).SOLD}">Item sold / Withdrawn</span>

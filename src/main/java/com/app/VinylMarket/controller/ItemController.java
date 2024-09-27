@@ -52,7 +52,7 @@ public class ItemController {
 
         itemService.saveItem(itemDto);
 
-        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+        FileUploadUtil.saveFile(uploadDir, uniqueFilename, multipartFile);
 
         return "redirect:/item/create?success";
     }
